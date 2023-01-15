@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>绑定样式</title>
+    <style>
+        .basic {
+            width: 300px;
+            height: 200px;
+            font-size: 30px;
+            border: solid;
+            /* background-color: antiquewhite; */
+        }
+        
+        .normal {
+            width: 280px;
+            height: 180px;
+            background-color: aquamarine;
+        }
+        
+        .sad {
+            background-color: burlywood;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="root">
+        <!-- 绑定class样式 字符串写法,适用于样式的类名不确定,需要动态指定 -->
+        <div class="basic" :class="mood" @click="changeMood">{{name}}</div> <br> <br>
+        <!-- 绑定class样式 数组写法,适用于要绑定的样式个数不确定,名字不确定 -->
+        <div class="basic" :class="classArr">{{name}}</div> <br> <br>
+        <!-- 绑定class样式 对象写法，适用于要绑定的样式个数、名字都确定,但要动态决定用不用 -->
+        <div class="basic" :class="classObj">{{name}}</div> <br> <br>
+
+        <!-- 绑定style样式 对象写法 -->
+        <div class="basic" :style="styleObj">{{name}}</div> <br> <br>
+        <!-- 绑定style样式 数组写法 -->
+        <div class="basic" :style="styleArr">{{name}}</div> <br> <br>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            name: '绑定样式',
+            mood: 'normal', // normal必须在是一个存在的css样式，否则不生效
+            classArr: ['style1', 'style2', 'style3'],
+            classObj: {
+                style1: false,
+                style2: false
+            },
+            styleObj: {
+                fontSize: '40px',
+                color: 'red',
+            },
+            styleObj2: {
+                backgroundColor: 'orange'
+            },
+            styleArr: [{
+                fontSize: '40px',
+                color: 'blue',
+            }, {
+                backgroundColor: 'gray'
+            }]
+        },
+        methods: {
+            changeMood() {
+                this.mood = 'sad'
+            }
+        }
+    })
+</script>
+
+</html>
