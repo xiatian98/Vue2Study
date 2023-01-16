@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>列表渲染</title>
+</head>
+
+<body>
+
+    <div id="root">
+        <!-- 
+            不写key,vue会默认用index作为key,一般情况下用index做key是没有问题的
+            但是如果进行了乱序插入例如在列表的首位添加元素,就会造成key和元素之间错位
+            Vue虚拟DOM的对比
+                先比较就的DOM和新的DOM,对比其中的标签和属性,如果一样,就用旧的DOM中的值
+                否则,重新生成DOM
+         -->
+        <h2>人员列表</h2>
+        <ul>
+            <!-- 用v-for 遍历需要惟一标识每一个元素 -->
+            <!-- <li v-for="p in persons" "key="p.id">{{p.name}} - {{p.age}}</li> -->
+            <li v-for="(p, index) in persons" :key="p.id">{{p.name}} - {{p.age}}</li>
+        </ul>
+
+    </div>
+</body>
+
+<script type=" text/javascript ">
+    Vue.config.productionTip = false
+
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            persons: [{
+                id: '001',
+                name: '张三',
+                age: 18
+            }, {
+                id: '002',
+                name: '李四',
+                age: 19
+            }, {
+                id: '003',
+                name: '王五',
+                age: 20
+            }, ],
+            // unshift():在数组前面添加元素，push()在数组后面添加元素
+        },
+        methods: {
+
+        }
+    })
+</script>
+
+</html>
